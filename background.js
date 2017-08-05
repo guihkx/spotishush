@@ -14,7 +14,7 @@ chrome.webRequest.onHeadersReceived.addListener(analyse_headers, filter, opts);
 // The logic here is very simple.
 // Spotify uses the same CDNs for both ads and music.
 // But the audio ads are served in unencrypted form, while music are not.
-// So we simply to check if the Content-Type header matches 'audio/mpeg'.
+// So we simply have to check if the Content-Type header matches 'audio/mpeg'.
 function analyse_headers(info)
 {
     var t, i, header, shall_mute = false;
@@ -27,7 +27,6 @@ function analyse_headers(info)
         if(header.name.toLowerCase() !== "content-type") {
             continue;
         }
-        // Ads are served unencrypted.
         if(header.value.toLowerCase() === "audio/mpeg") {
             shall_mute = true;
             console.log("analyse_headers(): Ad detected. Trying to mute tab");
