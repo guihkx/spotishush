@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "SpotiShush",
-    "version": "2017.8.4",
+    "version": "2017.8.7",
 
     "default_locale": "en",
     "description": "__MSG_ext_desc__",
@@ -20,6 +20,7 @@
     },
 
     "permissions": [
+        "https://open.spotify.com/*",
         "https://audio-fa.scdn.co/audio/*",
         "webRequest",
         "tabs"

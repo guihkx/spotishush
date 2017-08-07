@@ -1,4 +1,4 @@
-# ![SpotiShush](https://raw.githubusercontent.com/GUiHKX/spotishush/master/img/spotishush16.png) SpotiShush
+# ![SpotiShush](https://raw.githubusercontent.com/GUiHKX/spotishush/master/img/spotishush48.png) SpotiShush
 
 SpotiShush is a browser add-on that automatically mutes audio ads on [Spotify Web Player](https://open.spotify.com/).
 
@@ -12,10 +12,13 @@ While some Spotify audio ads can be a bit annoying, Spotify itself is amazing an
 
 ## How does it work?
 
-SpotiShush automatically detects when an audio advertising is about to be played, then **it mutes only the tab** where the ad is being played. After the ad finishes, SpotiShush unmutes the tab (unless another ad plays in sequence).
+SpotiShush automatically mutes the Spotify tab in your browser before it plays any audio ad. After the ad finishes, SpotiShush unmutes the tab so you can enjoy your favorite songs again.
 
 ---
 
 # Installation
 
-TBA
+* Chrome: https://chrome.google.com/webstore/detail/dfbbfmkkafpoohlcmkndjnpohhgelgnf
+* Firefox: https://addons.mozilla.org/firefox/addon/spotishush/
+
+Go to the [Releases page](https://github.com/GUiHKX/spotishush/releases) if you need .CRX or .XPI files.
