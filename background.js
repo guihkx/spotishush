@@ -6,10 +6,6 @@ chrome.runtime.onConnect.addListener(msg_listener);
 
 function msg_listener(port)
 {
-    console.assert(port.name === "spotishush");
-
-    console.log("msg_listener(): connected");
-
     port.onMessage.addListener(mute_unmute);
 }
 
@@ -23,5 +19,5 @@ function mute_unmute(msg, info)
 
 function volume_control(info)
 {
-    console.log("volume_control(): " + (info.mutedInfo.muted ? "Muted" : "Unmuted"));
+    console.log("[SpotiShush] Tab state: " + (info.mutedInfo.muted ? "MUTED" : "UNMUTED"));
 }

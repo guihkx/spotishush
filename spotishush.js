@@ -1,23 +1,19 @@
 "use strict";
 
-var id, play_button, port;
+var id, now_playing, port;
 
-id = setInterval(wait_for_player_controls, 1000);
+console.info("[SpotiShush] Loaded");
+console.info("[SpotiShush] Awaiting UI initilization");
 
-function wait_for_player_controls()
+id = setInterval(wait_for_any_song, 1000);
+
+function wait_for_any_song()
 {
-    var obj;
-    
-    // Play/Pause button
-    obj = document.getElementsByClassName("control-button--circled");
+    now_playing = document.querySelector("div.now-playing");
 
-    if(obj.length !== 1) {
-        return false;
+    if(now_playing === null) {
+        return;
     }
-    console.log("[SpotiShush] Caching play/pause button");
-
-    play_button = obj[0];
-
     clearInterval(id);
     setup_observer();
 }
@@ -27,7 +23,9 @@ function setup_observer()
     var mo;
 
     mo = new MutationObserver(is_audio_ad);
-    mo.observe(play_button, {"attributes": true});
+    mo.observe(now_playing, {"childList": true});
+
+    console.info("[SpotiShush] Success! Monitoring ads now...");
 
     setup_port();
 }
@@ -39,16 +37,31 @@ function setup_port()
 
 function is_audio_ad(mutations)
 {
-    var classes, is_ad;
+    var np_url, is_ad;
 
-    classes = play_button.className;
+    console.log("[SpotiShush] Mutations:");
+    console.log(mutations);
 
-    if(classes.indexOf("control-button--disabled") !== -1) {
-        is_ad = true;
-        console.log("[SpotiShush] An ad is about to be played");
+    np_url = now_playing.firstElementChild;
+
+    if(np_url === null) {
+        return;
+    }
+    if(np_url.tagName !== "A") {
+        console.error("[SpotiShush] Unexpected firstElementChild:");
+        console.error(np_url);
+
+        return;
+    }
+    console.info("[SpotiShush] URL of current album/playlist: " + np_url.href);
+
+    if(np_url.hostname === "open.spotify.com") {
+        is_ad = false;
+        console.info("[SpotiShush] Not an ad");
     }
     else {
-        is_ad = false;
+        is_ad = true;
+        console.info("[SpotiShush] Ad detected");
     }
     port.postMessage({"mute": is_ad});
 }
