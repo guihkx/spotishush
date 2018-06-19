@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "SpotiShush",
-    "version": "2018.3.13",
+    "version": "2018.6.19",
 
     "default_locale": "en",
     "description": "__MSG_ext_desc__",

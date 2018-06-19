@@ -3,11 +3,11 @@
 var id, now_playing, port;
 
 console.info("[SpotiShush] Loaded");
-console.info("[SpotiShush] Awaiting UI initilization");
+console.info("[SpotiShush] Awaiting UI initialization");
 
-id = setInterval(wait_for_any_song, 1000);
+id = setInterval(await_spotify_ui, 1000);
 
-function wait_for_any_song()
+function await_spotify_ui()
 {
     now_playing = document.querySelector("div.now-playing");
 
@@ -37,25 +37,18 @@ function setup_port()
 
 function is_audio_ad(mutations)
 {
-    var np_url, is_ad;
+    var span, is_ad;
 
     console.log("[SpotiShush] Mutations:");
     console.log(mutations);
 
-    np_url = now_playing.firstElementChild;
+    // If the first element is draggable, then it's a regular song:
+    // <span draggable="true"></a>
+    //     <a aria-label="Now playing: ..." href="..."></a>
+    // </span>
+    span = now_playing.firstElementChild;
 
-    if(np_url === null) {
-        return;
-    }
-    if(np_url.tagName !== "A") {
-        console.error("[SpotiShush] Unexpected firstElementChild:");
-        console.error(np_url);
-
-        return;
-    }
-    console.info("[SpotiShush] URL of current album/playlist: " + np_url.href);
-
-    if(np_url.hostname === "open.spotify.com") {
+    if(span !== null && span.tagName === "SPAN" && span.draggable === true) {
         is_ad = false;
         console.info("[SpotiShush] Not an ad");
     }
