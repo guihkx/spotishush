@@ -5,15 +5,26 @@ module.exports = Object.assign(defaultConfig, {
   run: {
     chromiumProfile: './tmp-chromium',
     args: [
+      // https://peter.sh/experiments/chromium-command-line-switches/
       '--auto-open-devtools-for-tabs',
-      '--start-maximized',
       '--disable-breakpad',
+      '--disable-cloud-import',
       '--disable-default-apps',
+      '--disable-ntp-most-likely-favicons-from-server',
+      '--disable-ntp-popular-sites',
+      '--disable-offline-auto-reload',
       '--disable-signin-promo',
+      '--disable-single-click-autofill',
       '--disable-sync',
+      '--enable-features=WebUIDarkMode',
+      '--force-dark-mode',
+      '--host-rules="MAP *.google-analytics.com 0.0.0.0","MAP *.googleadservices.com 0.0.0.0","MAP *.doubleclick.net 0.0.0.0 │ ","MAP *.googletagservices.com 0.0.0.0"',
       '--no-default-browser-check',
       '--no-pings',
-      '--restore-last-session'
+      '--password-store=basic',
+      '--restore-last-session',
+      '--safebrowsing-disable-extension-blacklist',
+      '--start-maximized'
     ],
     startUrl: [
       'https://accounts.spotify.com/en/login?continue=https://open.spotify.com/',
