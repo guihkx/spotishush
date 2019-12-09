@@ -176,7 +176,7 @@
       "consoleTimestampsEnabled": "true",
       "currentDockState": "\"right\"",
       "inspectorVersion": "28",
-      "messageLevelFilters": "{\"verbose\":false,\"info\":true,\"warning\":true,\"error\":true}",
+      "messageLevelFilters": "{\"verbose\":true,\"info\":true,\"warning\":true,\"error\":true}",
       "networkPanelSidebarState": "{\"vertical\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
       "networkPanelSplitViewState": "{\"vertical\":{\"size\":0}}",
       "networkPanelSplitViewWaterfall": "{\"vertical\":{\"size\":0}}",
