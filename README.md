@@ -1,4 +1,4 @@
-# ![SpotiShush](https://raw.githubusercontent.com/guihkx/spotishush/master/img/spotishush48.png) SpotiShush
+# <img valign="middle" src="./etc/spotishush-logo.svg" width="32" height="32"> SpotiShush
 
 SpotiShush is a browser extension that automatically mutes audio ads on [Spotify Web Player](https://open.spotify.com/).
 
