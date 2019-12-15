@@ -15,7 +15,11 @@
     "polyfill:copy": "cp ./node_modules/webextension-polyfill/dist/browser-polyfill.min.js{,.map} ./src/",
     "standard:check": "standard --verbose ./src/**/*.js",
     "standard:fix": "standard --fix --verbose ./src/**/*.js",
-    "start:chromium": "mkdir -p ./tmp-chromium/Default && cp ./etc/chromium/* ./tmp-chromium/Default/ && web-ext run --config ./web-ext-chromium.js --no-config-discovery --target chromium && rm -rf ./tmp-chromium",
+    "start:chromium": "mkdir -p ./tmp-chromium/Default/ && cp ./etc/chromium/* ./tmp-chromium/Default/ && web-ext run --config ./web-ext-chromium.js --no-config-discovery --target chromium && rm -rf ./tmp-chromium/",
     "start:firefox": "web-ext run --config ./web-ext-firefox.js --no-config-discovery --target firefox-desktop"
+  },
+  "standard": {
+    "envs": ["browser", "webextensions"],
+    "globals": ["SpotiShush"]
   }
 }
