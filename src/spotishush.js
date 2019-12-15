@@ -1,60 +1,88 @@
-"use strict";
+;(async () => {
+  'use strict'
 
-var id, now_playing, port;
+  SpotiShush.log('Started!')
 
-console.info("[SpotiShush] Loaded");
-console.info("[SpotiShush] Awaiting UI initialization");
+  // Current tab might be muted if the user refreshed the page while
+  // an ad was playing. So, only if *we* had muted it, we unmute it.
+  try {
+    await browser.runtime.sendMessage({ action: 'unmute' })
+  } catch (error) {
+    SpotiShush.debug(error.message)
+  }
+  SpotiShush.log('Waiting for player controls to be ready...')
 
-id = setInterval(await_spotify_ui, 1000);
+  const nowPlaying = await spotifyControlsReady()
 
-function await_spotify_ui()
-{
-    now_playing = document.querySelector("div.now-playing");
+  try {
+    setupAdsObserver(nowPlaying)
+  } catch (error) {
+    SpotiShush.log('Unable to set up ads monitor:', error.message)
+    return
+  }
+  SpotiShush.log('Success. Monitoring ads now!')
 
-    if(now_playing === null) {
-        return;
-    }
-    clearInterval(id);
-    setup_observer();
-}
+  function spotifyControlsReady (checkInterval) {
+    return new Promise((resolve) => {
+      const id = setInterval(() => {
+        const nowPlaying = document.querySelector('div.now-playing')
 
-function setup_observer()
-{
-    var mo;
+        if (nowPlaying !== null) {
+          clearInterval(id)
+          resolve(nowPlaying)
+        }
+      }, checkInterval || 500)
+    })
+  }
 
-    mo = new MutationObserver(is_audio_ad);
-    mo.observe(now_playing, {"childList": true});
+  // Detect ads by observing mutations in Spotify's player controls.
+  //
+  // Previously, to detect an ad we'd check if the `firstElementChild` of
+  // the `nowPlaying` element was _not_ a <span> tag and also _not_ draggable.
+  // Now, the detection has been simplified a bit by just checking if the
+  // `firstElementChild` is an anchor element (<a>).
+  function setupAdsObserver (nowPlaying) {
+    const mo = new MutationObserver(async (mutations) => {
+      const artworkObj = nowPlaying.firstElementChild
 
-    console.info("[SpotiShush] Success! Monitoring ads now...");
+      if (artworkObj === null) {
+        throw new Error('BUG: Unable to get child node!')
+      }
+      SpotiShush.debug('artworkObj:', artworkObj)
+      SpotiShush.debug('mutations:', mutations)
 
-    setup_port();
-}
-
-function setup_port()
-{
-    port = chrome.runtime.connect({"name": "spotishush"});
-}
-
-function is_audio_ad(mutations)
-{
-    var span, is_ad;
-
-    console.log("[SpotiShush] Mutations:");
-    console.log(mutations);
-
-    // If the first element is draggable, then it's a regular song:
-    // <span draggable="true"></a>
-    //     <a aria-label="Now playing: ..." href="..."></a>
-    // </span>
-    span = now_playing.firstElementChild;
-
-    if(span !== null && span.tagName === "SPAN" && span.draggable === true) {
-        is_ad = false;
-        console.info("[SpotiShush] Not an ad");
-    }
-    else {
-        is_ad = true;
-        console.info("[SpotiShush] Ad detected");
-    }
-    port.postMessage({"mute": is_ad});
-}
+      if (artworkObj.tagName === 'A') {
+        // This is an ad. Here's the simplified HTML snippet:
+        //
+        // <a href="https://some-ad-website.com/">
+        //     <div class="now-playing__cover-art">...</div>
+        // </a>
+        SpotiShush.log('Ad detected!')
+        try {
+          await browser.runtime.sendMessage({ action: 'mute' })
+        } catch (error) {
+          SpotiShush.debug(error.message)
+          return
+        }
+        SpotiShush.log('Tab muted.')
+      } else {
+        // This is a regular song. Here's the simplified HTML snippet:
+        //
+        // <span draggable="true">
+        //     <a aria-label="Now playing: ..." href="..."></a>
+        // </span>
+        SpotiShush.log('Not an ad!')
+        try {
+          await browser.runtime.sendMessage({ action: 'unmute' })
+        } catch (error) {
+          SpotiShush.debug(error.message)
+          return
+        }
+        SpotiShush.log('Tab unmuted.')
+      }
+    })
+    mo.observe(nowPlaying, {
+      attributes: true
+    })
+  }
+})()
