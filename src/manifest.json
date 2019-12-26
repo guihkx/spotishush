@@ -21,7 +21,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://open.spotify.com/*"
+        "https://open.spotify.com/*",
+        "https://www.deezer.com/*"
       ],
       "js": [
         "browser-polyfill.min.js",

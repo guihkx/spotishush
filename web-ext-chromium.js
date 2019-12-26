@@ -28,6 +28,7 @@ module.exports = Object.assign(defaultConfig, {
     ],
     startUrl: [
       'https://accounts.spotify.com/en/login?continue=https://open.spotify.com/',
+      'https://www.deezer.com/us/login/email?redirect_type=page&redirect_link=/us/playlist/1996494362'
     ]
   }
 })

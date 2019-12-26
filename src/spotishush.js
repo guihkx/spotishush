@@ -10,6 +10,18 @@
   } catch (error) {
     SpotiShush.debug(error.message)
   }
+  // Deezer
+  if (window.location.hostname === 'www.deezer.com') {
+    window.addEventListener('sasVideoStart', deezerRunBeforeAds)
+    window.addEventListener('sasVideoEnd', deezerRunAfterAds)
+    window.addEventListener('adError', deezerRunAfterAds)
+
+    // Well, that was easy...
+    SpotiShush.log('Monitoring ads now!')
+
+    return
+  }
+  // Spotify
   SpotiShush.log('Waiting for player controls to be ready...')
 
   const nowPlaying = await spotifyControlsReady()
@@ -84,5 +96,27 @@
     mo.observe(nowPlaying, {
       attributes: true
     })
+  }
+
+  async function deezerRunBeforeAds () {
+    SpotiShush.log('Ad detected!')
+    try {
+      await browser.runtime.sendMessage({ action: 'mute' })
+    } catch (error) {
+      SpotiShush.debug(error.message)
+      return
+    }
+    SpotiShush.log('Tab muted.')
+  }
+
+  async function deezerRunAfterAds () {
+    SpotiShush.log('Ad has ended!')
+    try {
+      await browser.runtime.sendMessage({ action: 'unmute' })
+    } catch (error) {
+      SpotiShush.debug(error.message)
+      return
+    }
+    SpotiShush.log('Tab unmuted.')
   }
 })()
