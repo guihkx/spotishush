@@ -7,7 +7,7 @@
     "webextension-polyfill": "^0.6.0"
   },
   "devDependencies": {
-    "standard": "^14.3.1",
+    "standard": "^14.3.3",
     "web-ext": "^4.1.0"
   },
   "scripts": {
@@ -19,7 +19,12 @@
     "start:firefox": "web-ext run --config ./web-ext-firefox.js --no-config-discovery --target firefox-desktop"
   },
   "standard": {
-    "envs": ["browser", "webextensions"],
-    "globals": ["SpotiShush"]
+    "envs": [
+      "browser",
+      "webextensions"
+    ],
+    "globals": [
+      "SpotiShush"
+    ]
   }
 }
