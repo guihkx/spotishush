@@ -1,18 +1,16 @@
 # <img valign="middle" src="./etc/spotishush-logo.svg" width="32" height="32"> SpotiShush
 
-SpotiShush is a browser extension that automatically mutes audio ads on [Spotify Web Player](https://open.spotify.com/).
+SpotiShush is a browser extension that automatically mutes audio ads on [Spotify Web Player](https://open.spotify.com/) and [Deezer](https://www.deezer.com/).
 
 ## Installation
 
-Pick the right extension for your browser, and install it:
+Pick the right one for your browser:
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/dfbbfmkkafpoohlcmkndjnpohhgelgnf?label=GOOGLE+CHROME&style=for-the-badge)](https://chrome.google.com/webstore/detail/dfbbfmkkafpoohlcmkndjnpohhgelgnf)
 
 [![Mozilla Add-on](https://img.shields.io/amo/v/spotishush?label=MOZILLA+FIREFOX&style=for-the-badge)](https://addons.mozilla.org/firefox/addon/spotishush/)
 
-After the installation, just reload the Spotify tab in your browser and you're good to go!
-
-You can go to [Releases](https://github.com/guihkx/spotishush/releases) if you need `.crx` or `.xpi` files.
+No additional configuration is required! You just have to reload any Spotify or Deezer tab in your browser.
 
 ---
 
@@ -20,11 +18,11 @@ You can go to [Releases](https://github.com/guihkx/spotishush/releases) if you n
 
 ### Why not use an Ad Blocker instead?
 
-While ads can sometimes be annoying (especially in audio), I believe Spotify offers a great service for free and I like to show them support by disabling the ad blocker on their website.
+While ads can sometimes be annoying (especially in audio format), I believe Spotify and Deezer both offer an awesome service for non-paying users. And I also believe that if most people used an ad-blocker, the free modality would probably be much more limited.
 
 ### How does it work?
 
-SpotiShush will automatically mute the Spotify tab before it plays any audio ad. After the ad finishes, SpotiShush unmutes the tab so you can enjoy your favorite songs again.
+SpotiShush will instantly mute the browser tab once it detects an audio ad will play. After the ad finishes, SpotiShush will restore the tab's audio so you can enjoy your favorite songs again.
 
 ---
 
@@ -34,33 +32,36 @@ SpotiShush will automatically mute the Spotify tab before it plays any audio ad.
 
 **NOTE: This has been tested on Linux only!**
 
-After you modify the code, you'll probably have to test it on Spotify. To automate this process a bit, we'll use `web-ext` to create a temporary Firefox/Chrome profile, with SpotiShush installed in it:
+We'll use `web-ext` to help with the testing/debugging process a bit. It will create a temporary profile on Firefox or Chrome for us, with SpotiShush pre-installed in it. So, to begin doing your testing, run:
+
+Firefox:
 
 ```bash
-# Test it on Firefox
 yarn start:firefox
-# Test it on Chromium/Chrome
+```
+
+Chrome/Chromium:
+
+```bash
 yarn start:chromium
 ```
 
-The command above will open Spotify's login page, so you'll obviously need a Spotify account to do your testing.
-
-It's also worth mentioning that you don't have re-open the browser every time you modify the code, because the extension will auto-reload once you save any file (this works best on Firefox, in my experience).
+Don't worry about having to re-run the command above every time you change something in the code, because `web-ext` supports hot-reloading. You may want to reload the tabs in your browser, however.
 
 ### Linting
 
-SpotiShush follows the [StandardJS coding style](https://standardjs.com/). Fortunately, it has an automatic code linter that helps you with the styling.
+SpotiShush follows the [StandardJS coding style](https://standardjs.com/).
 
-Before you commit your changes, run the `standard` linter to check for any errors:
+Before you commit your changes, run the `standard` linter to check for errors:
 
 ```bash
 yarn standard:check
 ```
 
-Fix any errors, then proceed to run `standard`'s automatic code formatter:
+Then, proceed to run Standard's automatic code formatter:
 
 ```bash
 yarn standard:fix
 ```
 
-And that's pretty much it. Now you can commit your changes and send a pull request!
+After that, feel free to send a pull request. :)
