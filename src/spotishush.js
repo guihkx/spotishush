@@ -80,9 +80,11 @@
       } else {
         // This is a regular song. Here's the simplified HTML snippet:
         //
-        // <span draggable="true">
+        // <div data-testid="CoverSlotCollapsed__container" class="...-scss" aria-hidden="true">
+        //   <div draggable="true">
         //     <a aria-label="Now playing: ..." href="..."></a>
-        // </span>
+        //   </div>
+        // </div>
         SpotiShush.log('Not an ad!')
         try {
           await browser.runtime.sendMessage({ action: 'unmute' })
