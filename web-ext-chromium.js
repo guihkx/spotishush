@@ -3,7 +3,7 @@ const defaultConfig = require('./web-ext-config.js')
 module.exports = Object.assign(defaultConfig, {
   ignoreFiles: [],
   run: {
-    chromiumProfile: './tmp-chromium',
+    chromiumProfile: './etc/chromium',
     args: [
       // https://peter.sh/experiments/chromium-command-line-switches/
       '--auto-open-devtools-for-tabs',
