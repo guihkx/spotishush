@@ -4,7 +4,7 @@
   "license": "MIT",
   "author": "guihkx",
   "dependencies": {
-    "webextension-polyfill": "^0.6.0"
+    "webextension-polyfill": "^0.7.0"
   },
   "devDependencies": {
     "standard": "^16.0.3",
