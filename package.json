@@ -7,7 +7,7 @@
     "webextension-polyfill": "^0.6.0"
   },
   "devDependencies": {
-    "standard": "^14.3.4",
+    "standard": "^16.0.3",
     "web-ext": "^5.0.0"
   },
   "scripts": {
