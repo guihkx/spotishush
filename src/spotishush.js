@@ -37,7 +37,7 @@
   function spotifyControlsReady (checkInterval) {
     return new Promise((resolve) => {
       const id = setInterval(() => {
-        const nowPlaying = document.querySelector('div.now-playing')
+        const nowPlaying = document.querySelector('div.Root__now-playing-bar')
 
         if (nowPlaying !== null) {
           clearInterval(id)
@@ -47,28 +47,28 @@
     })
   }
 
-  // Detect ads by observing mutations in Spotify's player controls.
-  //
-  // Previously, to detect an ad we'd check if the `firstElementChild` of
-  // the `nowPlaying` element was _not_ a <span> tag and also _not_ draggable.
-  // Now, the detection has been simplified a bit by just checking if the
-  // `firstElementChild` is an anchor element (<a>).
+  // Detect ads by observing mutations in the `data-testid` HTML attribute of Spotify's player controls.
   function setupAdsObserver (nowPlaying) {
-    const mo = new MutationObserver(async (mutations) => {
-      const artworkObj = nowPlaying.firstElementChild
+    const footerObj = nowPlaying.firstElementChild
 
-      if (artworkObj === null) {
-        throw new Error('BUG: Unable to get child node!')
-      }
-      SpotiShush.debug('artworkObj:', artworkObj)
+    if (footerObj === null) {
+      throw new Error('BUG: Unable to get child node from `nowPlaying`!')
+    }
+    SpotiShush.debug('footerObj:', footerObj)
+
+    if (footerObj.tagName !== 'FOOTER') {
+      throw new Error('BUG: Expected a `footer` tag, but got:', footerObj.tagName)
+    }
+
+    const mo = new MutationObserver(async (mutations) => {
       SpotiShush.debug('mutations:', mutations)
 
-      if (artworkObj.tagName === 'A') {
+      if (footerObj.getAttribute('data-testid') === 'now-playing-bar-ad-type-ad') {
         // This is an ad. Here's the simplified HTML snippet:
         //
-        // <a href="https://some-ad-website.com/">
-        //     <div class="now-playing__cover-art">...</div>
-        // </a>
+        // <div class="...-scss ellipsis-one-line ...-scss" data-testid="track-info-name" as="div" dir="auto">
+        //   <a href="https://some-ad-website.com/" data-testid="track-info-advertiser">Advertisement</a>
+        // </div>
         SpotiShush.log('Ad detected!')
         try {
           await browser.runtime.sendMessage({ action: 'mute' })
@@ -82,7 +82,7 @@
         //
         // <div data-testid="CoverSlotCollapsed__container" class="...-scss" aria-hidden="true">
         //   <div draggable="true">
-        //     <a aria-label="Now playing: ..." href="..."></a>
+        //     <a data-testid="cover-art-link" aria-label="Now playing: ..." href="..."></a>
         //   </div>
         // </div>
         SpotiShush.log('Not an ad!')
@@ -95,7 +95,7 @@
         SpotiShush.log('Tab unmuted.')
       }
     })
-    mo.observe(nowPlaying, {
+    mo.observe(footerObj, {
       attributes: true
     })
   }
