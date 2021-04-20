@@ -1,23 +1,25 @@
 {
   "account_id_migration_state": 2,
-  "account_tracker_service_last_update": "13220000206753115",
+  "account_tracker_service_last_update": "13263356056423141",
   "alternate_error_pages": {
-    "enabled": false
+    "backup": true
   },
+  "announcement_notification_service_first_run_time": "13263356056351881",
   "autocomplete": {
-    "retention_policy_last_version": 78
+    "retention_policy_last_version": 90
   },
   "autofill": {
     "credit_card_enabled": false,
-    "japan_city_field_migrated_to_street_address": true,
-    "orphan_rows_removed": true,
     "profile_enabled": false
   },
+  "bookmark_bar": {
+    "show_apps_shortcut": false,
+    "show_on_all_tabs": false
+  },
   "browser": {
-    "app_window_placement": {},
-    "custom_chrome_frame": true,
     "enable_spellchecking": false,
-    "has_seen_welcome_page": false
+    "has_seen_welcome_page": false,
+    "window_placement": {}
   },
   "countryid_at_install": 21843,
   "credentials_enable_autosignin": false,
@@ -83,7 +85,7 @@
       "0",
       "0",
       "0",
-      "652531"
+      "9783650"
     ],
     "daily_received_length": [
       "0",
@@ -145,53 +147,73 @@
       "0",
       "0",
       "0",
-      "652531"
+      "9783650"
     ],
-    "last_update_date": "13219988400000000",
-    "network_properties": {},
-    "this_week_number": 2605,
+    "last_update_date": "13263274800000000",
+    "this_week_number": 2676,
     "this_week_services_downstream_foreground_kb": {
-      "117649486": 437,
-      "119416099": 0,
-      "137116619": 2,
-      "18300705": 0,
+      "6019475": 80,
       "35473769": 0,
       "35565745": 1,
+      "41424546": 3,
       "49601082": 1,
-      "6019475": 153,
+      "54845618": 8985,
       "67052219": 0,
       "78917933": 40,
-      "95682324": 2
+      "117649486": 441,
+      "137116619": 1
+    }
+  },
+  "default_search_provider": {
+    "synced_guid": "485bf7d3-0215-45af-87dc-538868000092"
+  },
+  "default_search_provider_data": {
+    "template_url_data": {
+      "alternate_urls": [],
+      "contextual_search_url": "",
+      "created_by_policy": false,
+      "created_from_play_api": false,
+      "date_created": "0",
+      "doodle_url": "",
+      "favicon_url": "https://duckduckgo.com/favicon.ico",
+      "id": "5",
+      "image_url": "",
+      "image_url_post_params": "",
+      "input_encodings": [
+        "UTF-8"
+      ],
+      "keyword": "duckduckgo.com",
+      "last_modified": "0",
+      "last_visited": "0",
+      "logo_url": "",
+      "new_tab_url": "https://duckduckgo.com/chrome_newtab",
+      "originating_url": "",
+      "prepopulate_id": 92,
+      "safe_for_autoreplace": true,
+      "search_url_post_params": "",
+      "short_name": "DuckDuckGo",
+      "suggestions_url": "https://duckduckgo.com/ac/?q={searchTerms}&type=list",
+      "suggestions_url_post_params": "",
+      "synced_guid": "485bf7d3-0215-45af-87dc-538868000092",
+      "url": "https://duckduckgo.com/?q={searchTerms}",
+      "usage_count": 0
     }
   },
   "devtools": {
     "preferences": {
       "Inspector.drawerSplitViewState": "{\"horizontal\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
-      "InspectorView.splitViewState": "{\"vertical\":{\"size\":700}}",
-      "console.sidebar.width": "{\"vertical\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
-      "console.sidebarSelectedFilter": "\"message\"",
-      "console.textFilter": "",
-      "consoleGroupSimilar": "false",
-      "consoleShowSettingsToolbar": "false",
+      "InspectorView.splitViewState": "{\"vertical\":{\"size\":0}}",
+      "closeableTabs": "{\"security\":true}",
       "consoleTimestampsEnabled": "true",
       "currentDockState": "\"right\"",
-      "inspectorVersion": "28",
-      "messageLevelFilters": "{\"verbose\":true,\"info\":true,\"warning\":true,\"error\":true}",
-      "networkPanelSidebarState": "{\"vertical\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
-      "networkPanelSplitViewState": "{\"vertical\":{\"size\":0}}",
-      "networkPanelSplitViewWaterfall": "{\"vertical\":{\"size\":0}}",
-      "panel-selectedTab": "\"console\"",
-      "releaseNoteVersionSeen": "20",
-      "request-info-formData-category-expanded": "true",
-      "request-info-general-category-expanded": "true",
-      "request-info-queryString-category-expanded": "true",
-      "request-info-requestHeaders-category-expanded": "true",
-      "request-info-requestPayload-category-expanded": "true",
-      "request-info-responseHeaders-category-expanded": "true",
-      "resourceViewTab": "\"headers\"",
-      "settings-view-tabOrder": "{\"preferences\":10,\"workspace\":20,\"blackbox\":30,\"devices\":40,\"throttling-conditions\":50,\"emulation-geolocations\":60,\"Shortcuts\":70}",
-      "undefined-tabOrder": "{\"Styles\":10}"
+      "elements.styles.sidebar.width": "{\"vertical\":{\"size\":0,\"showMode\":\"OnlyMain\"}}",
+      "inspectorVersion": "30",
+      "releaseNoteVersionSeen": "32",
+      "undefined-tabOrder": "{\"Styles\":10,\"Computed\":20}"
     }
+  },
+  "domain_diversity": {
+    "last_reporting_timestamp": "13263356056434562"
   },
   "download": {
     "directory_upgrade": true
@@ -201,7 +223,9 @@
       "initialized": true
     },
     "chrome_url_overrides": {},
-    "last_chrome_version": "78.0.3904.108",
+    "last_chrome_version": "90.0.4430.72",
+    "pinned_extension_migration": true,
+    "pinned_extensions": [],
     "settings": {
       "ahfgeienlihckogmohjhadlkjgocpleb": {
         "active_permissions": {
@@ -225,7 +249,7 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "install_time": "13220000206675255",
+        "install_time": "13263356056353121",
         "location": 5,
         "manifest": {
           "app": {
@@ -238,8 +262,8 @@
           },
           "description": "Discover great apps, games, extensions and themes for Chromium.",
           "icons": {
-            "128": "webstore_icon_128.png",
-            "16": "webstore_icon_16.png"
+            "16": "webstore_icon_16.png",
+            "128": "webstore_icon_128.png"
           },
           "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtl3tO0osjuzRsf6xtD2SKxPlTfuoy7AWoObysitBPvH5fE1NaAA1/2JkPWkVDhdLBWLaIBPYeXbzlHp3y4Vv/4XG+aN5qFE3z+1RU/NqkzVYHtIpVScf3DjTYtKVL66mzVGijSoAIwbFCC3LpGdaoe6Q1rSRDp76wR6jjFzsYwQIDAQAB",
           "name": "Web Store",
@@ -254,7 +278,6 @@
           ],
           "version": "0.2"
         },
-        "never_activated_since_loaded": true,
         "page_ordinal": "n",
         "path": "/usr/lib/chromium/resources/web_store",
         "preferences": {},
@@ -268,8 +291,7 @@
           "api": [
             "cryptotokenPrivate",
             "externally_connectable.all_urls",
-            "tabs",
-            "webConnectable"
+            "tabs"
           ],
           "explicit_host": [
             "http://*/*",
@@ -287,7 +309,7 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "install_time": "13220000206675988",
+        "install_time": "13263356056354160",
         "location": 5,
         "manifest": {
           "background": {
@@ -348,52 +370,7 @@
           ],
           "version": "0.9.74"
         },
-        "never_activated_since_loaded": true,
         "path": "/usr/lib/chromium/resources/cryptotoken",
-        "preferences": {},
-        "regular_only_preferences": {},
-        "state": 1,
-        "was_installed_by_default": false,
-        "was_installed_by_oem": false
-      },
-      "mfehgcgbbipciphmccgaenjidiccnmng": {
-        "active_permissions": {
-          "api": [
-            "cloudPrintPrivate"
-          ],
-          "manifest_permissions": []
-        },
-        "commands": {},
-        "content_settings": [],
-        "creation_flags": 1,
-        "events": [],
-        "from_bookmark": false,
-        "from_webstore": false,
-        "incognito_content_settings": [],
-        "incognito_preferences": {},
-        "install_time": "13220000206674813",
-        "location": 5,
-        "manifest": {
-          "app": {
-            "launch": {
-              "web_url": "https://www.google.com/cloudprint"
-            },
-            "urls": [
-              "https://www.google.com/cloudprint/enable_chrome_connector"
-            ]
-          },
-          "description": "Cloud Print",
-          "display_in_launcher": false,
-          "icons": {},
-          "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDqOhnwk4+HXVfGyaNsAQdU/js1Na56diW08oF1MhZiwzSnJsEaeuMN9od9q9N4ZdK3o1xXOSARrYdE+syV7Dl31nf6qz3A6K+D5NHe6sSB9yvYlIiN37jdWdrfxxE0pRYEVYZNTe3bzq3NkcYJlOdt1UPcpJB+isXpAGUKUvt7EQIDAQAB",
-          "name": "Cloud Print",
-          "permissions": [
-            "cloudPrintPrivate"
-          ],
-          "version": "0.1"
-        },
-        "never_activated_since_loaded": true,
-        "path": "/usr/lib/chromium/resources/cloud_print",
         "preferences": {},
         "regular_only_preferences": {},
         "state": 1,
@@ -422,10 +399,10 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "install_time": "13220000206676382",
+        "install_time": "13263356056353545",
         "location": 5,
         "manifest": {
-          "content_security_policy": "script-src 'self' 'wasm-eval' blob: filesystem: chrome://resources; object-src * blob: externalfile: file: filesystem: data:; plugin-types application/x-google-chrome-pdf",
+          "content_security_policy": "script-src 'self' 'wasm-eval' blob: filesystem: chrome://resources; object-src * blob: externalfile: file: filesystem: data:",
           "description": "",
           "incognito": "split",
           "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDN6hM0rsDYGbzQPQfOygqlRtQgKUXMfnSjhIBL7LnReAVBEd7ZmKtyN2qmSasMl4HZpMhVe2rPWVVwBDl6iyNE/Kok6E6v6V3vCLGsOpQAuuNVye/3QxzIldzG/jQAdWZiyXReRVapOhZtLjGfywCvlWq7Sl/e3sbc0vWybSDI2QIDAQAB",
@@ -449,7 +426,6 @@
           ],
           "version": "1"
         },
-        "never_activated_since_loaded": true,
         "path": "/usr/lib/chromium/resources/pdf",
         "preferences": {},
         "regular_only_preferences": {},
@@ -462,7 +438,6 @@
           "api": [
             "desktopCapture",
             "processes",
-            "webConnectable",
             "webrtcAudioPrivate",
             "webrtcDesktopCapturePrivate",
             "webrtcLoggingPrivate",
@@ -481,7 +456,7 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "install_time": "13220000206675651",
+        "install_time": "13263356056353897",
         "location": 5,
         "manifest": {
           "background": {
@@ -490,8 +465,7 @@
           },
           "externally_connectable": {
             "matches": [
-              "https://*.google.com/*",
-              "*://localhost/*"
+              "https://*.google.com/*"
             ]
           },
           "incognito": "split",
@@ -507,9 +481,8 @@
             "webrtcDesktopCapturePrivate",
             "webrtcLoggingPrivate"
           ],
-          "version": "1.3.14"
+          "version": "1.3.16"
         },
-        "never_activated_since_loaded": true,
         "path": "/usr/lib/chromium/resources/hangout_services",
         "preferences": {},
         "regular_only_preferences": {},
@@ -519,19 +492,19 @@
       }
     },
     "theme": {
-      "id": "",
       "use_system": true
     },
     "ui": {
       "developer_mode": true
     }
   },
-  "http_original_content_length": "652531",
-  "http_received_content_length": "652531",
   "net": {
     "network_prediction_options": 2
   },
   "ntp": {
+    "app_page_names": [
+      "Apps"
+    ],
     "custom_background_local_to_device": false,
     "num_personal_suggestions": 1
   },
@@ -545,36 +518,43 @@
   "previews": {
     "litepage": {
       "user-needs-notification": false
-    },
-    "offline_helper": {
-      "available_pages": {}
     }
   },
   "profile": {
     "avatar_bubble_tutorial_shown": 2,
     "avatar_index": 26,
-    "blacklisted_credentials_normalized": true,
-    "block_third_party_cookies": true,
     "content_settings": {
+      "enable_quiet_permission_ui_enabling_method": {
+        "notifications": 1
+      },
       "exceptions": {
         "accessibility_events": {},
         "app_banner": {},
+        "ar": {},
         "auto_select_certificate": {},
         "automatic_downloads": {},
         "autoplay": {},
         "background_sync": {},
+        "bluetooth_chooser_data": {},
         "bluetooth_guard": {},
         "bluetooth_scanning": {},
+        "camera_pan_tilt_zoom": {},
         "client_hints": {},
         "clipboard": {},
         "cookies": {},
         "durable_storage": {},
-        "flash_data": {},
+        "file_system_last_picked_directory": {},
+        "file_system_read_guard": {},
+        "file_system_write_guard": {},
+        "font_access": {},
         "geolocation": {},
         "hid_chooser_data": {},
         "hid_guard": {},
+        "idle_detection": {},
         "images": {},
         "important_site_info": {},
+        "insecure_private_network": {},
+        "installed_web_app_metadata": {},
         "intent_picker_auto_display": {},
         "javascript": {},
         "legacy_cookie_access": {},
@@ -583,39 +563,43 @@
         "media_stream_mic": {},
         "midi_sysex": {},
         "mixed_script": {},
-        "native_file_system_write_guard": {},
+        "nfc": {},
         "notifications": {},
         "password_protection": {},
         "payment_handler": {},
         "permission_autoblocking_data": {},
-        "plugins": {},
+        "permission_autorevocation_data": {},
         "popups": {},
         "ppapi_broker": {},
         "protocol_handler": {},
+        "safe_browsing_url_check_data": {},
         "sensors": {},
         "serial_chooser_data": {},
         "serial_guard": {},
         "site_engagement": {},
         "sound": {},
         "ssl_cert_decisions": {},
+        "storage_access": {},
         "subresource_filter": {},
         "subresource_filter_data": {},
         "usb_chooser_data": {},
-        "usb_guard": {}
+        "usb_guard": {},
+        "vr": {},
+        "window_placement": {}
       },
       "pref_version": 1
     },
-    "created_by_version": "78.0.3904.108",
+    "cookie_controls_mode": 1,
+    "created_by_version": "90.0.4430.72",
+    "creation_time": "13263356056335457",
     "default_content_setting_values": {
-      "cookies": 4
+      "subresource_filter": 1
     },
     "exit_type": "Normal",
     "exited_cleanly": true,
-    "last_time_obsolete_http_credentials_removed": 1575526666.67454,
+    "last_time_obsolete_http_credentials_removed": 1618882516.39956,
     "managed_user_id": "",
-    "migration_to_logindb_step": 3,
-    "name": "SpotiShush",
-    "password_manager_onboarding_state": 1
+    "name": "SpotiShush"
   },
   "protection": {
     "macs": {
@@ -623,23 +607,21 @@
         "show_home_button": "904452986128BBEE5A7B1FFB8F342100C3150E3D9FD76C4105DF33EB021E22FD"
       },
       "default_search_provider_data": {
-        "template_url_data": "575D258E47F940C6887685ABA99A5839CBFE4BA30863349DFE0D0C375AAB8816"
+        "template_url_data": "BD5258C2F104EFACE93771054626935A9E11B0CF945D9A9838FA6D35FDF5967C"
       },
       "extensions": {
         "settings": {
-          "ahfgeienlihckogmohjhadlkjgocpleb": "E15F651C8EFBBDF6D2266A7121B4946474D0FDCF45EF9C6FEE948E09F4B87A5B",
-          "kmendfapggjehodndflmmgagdbamhnfd": "23B72084757642EA5A5709974746F6BCC12077561FCFD84A9540548B1065FD7A",
-          "mfehgcgbbipciphmccgaenjidiccnmng": "E66D0BC612E37922FF9280B0E9B7B9524D1CBBFA55149AA82CE4F2F14776EE5C",
-          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "521017B5AB0CC4CE6C9F16264F031B7A324A69D098FDF40B8186427E2CAEDA46",
-          "nkeimhogjdpnpccoofpliimaahmaaome": "77E4CE4C38AF15F54F68985C5FFB6F4C5C61944818D9CD34D3C4B08A14168C2F"
+          "ahfgeienlihckogmohjhadlkjgocpleb": "C8AB41231E37CA34C3359DCE56AA5E529F62CA76BC79FF2B879ECD19DF2E35AE",
+          "kmendfapggjehodndflmmgagdbamhnfd": "D5C4954C109E18D112304434F896ED7F5742CF5386227FB6B65677B3D6516C32",
+          "mhjfbmdgcfjbbpaeojofohoefgiehjai": "0B56C1B919673F011C726DFB26D176680A50BB3BA5E1156E50071A1D5292F2CE",
+          "nkeimhogjdpnpccoofpliimaahmaaome": "4E9CA0B82ED076857456E68FC543DF13F3A4E07B72D15C2AB4956045F1E50DA3"
         }
       },
       "google": {
         "services": {
           "account_id": "E5B4CD7C5FA271A47D07D462465AFD63DBF6A8CDFAFEF4839D13F8F552131486",
           "last_account_id": "6C67156FD15665D53CD24B5098D16B462BA8B8A0EFDD969A317C3235E973A4A3",
-          "last_username": "24FCEF9BF7DF12A2935BE143E58951E09DBAA1D3E0E24430C0FF93009F5D6AFD",
-          "username": "D26BCA1B2F99EDF1D42826D14541328D9E374F4559553FC3BB7E76405AC31AE2"
+          "last_username": "24FCEF9BF7DF12A2935BE143E58951E09DBAA1D3E0E24430C0FF93009F5D6AFD"
         }
       },
       "homepage": "B1E9FE8108A84F532486D13AAC43C0AFDA16D3DFC9EB2F743AEE11F89F2F163E",
@@ -659,7 +641,16 @@
     }
   },
   "safebrowsing": {
-    "enabled": false
+    "enabled": false,
+    "enhanced": false,
+    "event_timestamps": {
+      "1": {
+        "0": [
+          "13263356094"
+        ]
+      }
+    },
+    "metrics_last_log_time": "13263356056"
   },
   "search": {
     "suggest_enabled": false
@@ -667,26 +658,28 @@
   "session": {
     "restore_on_startup": 1
   },
+  "sessions": {},
   "signin": {
-    "AccountReconcilor": {
-      "kDiceMigrationOnStartup2": true
-    },
     "DiceMigrationComplete": true,
     "allowed": false,
     "allowed_on_next_startup": false
   },
   "spellcheck": {
     "dictionaries": [],
-    "dictionary": ""
-  },
-  "token_service": {
-    "dice_compatible": true
+    "dictionary": "",
+    "use_spelling_service": false
   },
   "translate": {
     "enabled": false
   },
   "translate_site_blacklist_with_time": {},
   "web_apps": {
-    "system_web_app_last_update": "78.0.3904.108"
+    "did_migrate_default_chrome_apps": [],
+    "last_preinstall_synchronize_version": "90",
+    "system_web_app_failure_count": 0,
+    "system_web_app_last_attempted_language": "en-US",
+    "system_web_app_last_attempted_update": "90.0.4430.72",
+    "system_web_app_last_installed_language": "en-US",
+    "system_web_app_last_update": "90.0.4430.72"
   }
 }
