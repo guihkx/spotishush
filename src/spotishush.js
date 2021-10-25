@@ -63,7 +63,7 @@
     const mo = new MutationObserver(async (mutations) => {
       SpotiShush.debug('mutations:', mutations)
 
-      if (footerObj.getAttribute('data-testid') === 'now-playing-bar-ad-type-ad') {
+      if (footerObj.getAttribute('data-testadtype') !== 'ad-type-none') {
         // This is an ad. Here's the simplified HTML snippet:
         //
         // <div class="...-scss ellipsis-one-line ...-scss" data-testid="track-info-name" as="div" dir="auto">
