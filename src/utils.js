@@ -1,7 +1,6 @@
 'use strict'
 
-// https://github.com/standard/standard/issues/614
-window.SpotiShush = class SpotiShush {
+class SpotiShush { // eslint-disable-line no-unused-vars
   static say (level) {
     const extManifest = browser.runtime.getManifest()
 
