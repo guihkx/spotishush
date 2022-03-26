@@ -3339,7 +3339,7 @@ standard-engine@^14.0.1:
     pkg-conf "^3.1.0"
     xdg-basedir "^4.0.0"
 
-standard@^16.0.4:
+standard@16.0.4:
   version "16.0.4"
   resolved "https://registry.yarnpkg.com/standard/-/standard-16.0.4.tgz#779113ba41dd218ab545e7b4eb2405561f6eb370"
   integrity sha512-2AGI874RNClW4xUdM+bg1LRXVlYLzTNEkHmTG5mhyn45OhbgwA+6znowkOGYy+WMb5HRyELvtNy39kcdMQMcYQ==
@@ -3740,7 +3740,7 @@ wcwidth@^1.0.0:
   dependencies:
     defaults "^1.0.3"
 
-web-ext@^6.7.0:
+web-ext@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/web-ext/-/web-ext-6.7.0.tgz#d86a9096f04a0d48f0e84c3e2061b6fc7c27dc6b"
   integrity sha512-QN+ufUPMNhLbrEqwFDOuoHy4m2OOPAp8NDMKJaWIByZRh8VPH+JoJ6/NAaIEcs9TPKnkA2018TNIJAfYN9EerA==
@@ -3776,7 +3776,7 @@ web-ext@^6.7.0:
     yargs "16.2.0"
     zip-dir "2.0.0"
 
-webextension-polyfill@^0.8.0:
+webextension-polyfill@0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/webextension-polyfill/-/webextension-polyfill-0.8.0.tgz#f80e9f4b7f81820c420abd6ffbebfa838c60e041"
   integrity sha512-a19+DzlT6Kp9/UI+mF9XQopeZ+n2ussjhxHJ4/pmIGge9ijCDz7Gn93mNnjpZAk95T4Tae8iHZ6sSf869txqiQ==

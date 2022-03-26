@@ -4,11 +4,11 @@
   "license": "MIT",
   "author": "guihkx",
   "dependencies": {
-    "webextension-polyfill": "^0.8.0"
+    "webextension-polyfill": "0.8.0"
   },
   "devDependencies": {
-    "standard": "^16.0.4",
-    "web-ext": "^6.7.0"
+    "standard": "16.0.4",
+    "web-ext": "6.7.0"
   },
   "scripts": {
     "build": "web-ext build --config ./web-ext-config.js",
