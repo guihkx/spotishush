@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "standard": "16.0.4",
-    "web-ext": "6.7.0"
+    "web-ext": "6.8.0"
   },
   "scripts": {
     "build": "web-ext build --config ./web-ext-config.js",
