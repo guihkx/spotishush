@@ -1,6 +1,6 @@
 # <img valign="middle" src="./etc/spotishush-logo.svg" width="32" height="32"> SpotiShush
 
-SpotiShush is a browser extension that automatically mutes audio ads on [Spotify Web Player](https://open.spotify.com/) and [Deezer](https://www.deezer.com/).
+SpotiShush is a browser extension that automatically mutes audio ads on [Spotify Web Player](https://open.spotify.com/), [Deezer](https://www.deezer.com/) and [TIDAL](https://listen.tidal.com/).
 
 ## Installation
 
@@ -10,7 +10,7 @@ Pick the right one for your browser:
 
 [![Mozilla Add-on](https://img.shields.io/amo/v/spotishush?label=MOZILLA+FIREFOX&style=for-the-badge)](https://addons.mozilla.org/firefox/addon/spotishush/)
 
-No additional configuration is required! You just have to reload any Spotify or Deezer tab in your browser.
+No additional configuration is required! You just have to reload any Spotify, Deezer or TIDAL tab in your browser.
 
 ---
 
@@ -18,7 +18,7 @@ No additional configuration is required! You just have to reload any Spotify or 
 
 ### Why not use an Ad Blocker instead?
 
-While ads can sometimes be annoying (especially in audio format), I believe Spotify and Deezer both offer an awesome service for non-paying users. And I also believe that if most people used an ad-blocker, the free modality would probably be much more limited.
+While ads can sometimes be annoying (especially in audio format), I believe Spotify, Deezer and TIDAL offer an awesome service for non-paying users. And I also believe that if most people used an ad-blocker, the free modality would probably be much more limited.
 
 ### How does it work?
 

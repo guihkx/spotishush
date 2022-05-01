@@ -10,45 +10,94 @@
   } catch (error) {
     SpotiShush.debug(error.message)
   }
-  // Deezer
-  if (window.location.hostname === 'www.deezer.com') {
-    window.addEventListener('sasVideoStart', deezerRunBeforeAds)
-    window.addEventListener('sasVideoEnd', deezerRunAfterAds)
-    window.addEventListener('adError', deezerRunAfterAds)
+  switch (window.location.hostname) {
+    case 'www.deezer.com': {
+      window.addEventListener('sasVideoStart', deezerRunBeforeAds)
+      window.addEventListener('sasVideoEnd', deezerRunAfterAds)
+      window.addEventListener('adError', deezerRunAfterAds)
 
-    // Well, that was easy...
-    SpotiShush.log('Monitoring ads now!')
+      // Well, that was easy...
+      SpotiShush.log('Monitoring ads now!')
+      break
+    }
+    case 'open.spotify.com': {
+      SpotiShush.log('Waiting for player controls to be ready...')
 
-    return
+      // Spotify's "Now Playing" bar
+      const nowPlaying = await lazySelector('div.Root__now-playing-bar')
+
+      try {
+        spotifySetupAdsObserver(nowPlaying)
+      } catch (error) {
+        SpotiShush.log('Unable to set up ads monitor:', error.message)
+        return
+      }
+      SpotiShush.log('Success. Monitoring ads now!')
+      break
+    }
+    case 'listen.tidal.com': {
+      SpotiShush.log('Waiting for repeat button to be ready...')
+
+      // TIDAL's repeat button
+      const repeatButton = await lazySelector('div#playbackControlBar > button[data-test=repeat]')
+
+      tidalSetupAdsObserver(repeatButton)
+
+      SpotiShush.log('Success. Monitoring ads now!')
+      // On TIDAL, ads are persistent through a page reload, so here we manually
+      // trigger our ads observer function to determine if there's an ad in our queue.
+      repeatButton.type = repeatButton.getAttribute('type')
+      break
+    }
+    default:
+      break
   }
-  // Spotify
-  SpotiShush.log('Waiting for player controls to be ready...')
 
-  const nowPlaying = await spotifyControlsReady()
-
-  try {
-    setupAdsObserver(nowPlaying)
-  } catch (error) {
-    SpotiShush.log('Unable to set up ads monitor:', error.message)
-    return
-  }
-  SpotiShush.log('Success. Monitoring ads now!')
-
-  function spotifyControlsReady (checkInterval) {
+  function lazySelector (selector, checkInterval) {
     return new Promise((resolve) => {
       const id = setInterval(() => {
-        const nowPlaying = document.querySelector('div.Root__now-playing-bar')
+        const element = document.querySelector(selector)
 
-        if (nowPlaying !== null) {
+        if (element !== null) {
           clearInterval(id)
-          resolve(nowPlaying)
+          resolve(element)
         }
       }, checkInterval || 500)
     })
   }
 
+  function tidalSetupAdsObserver (repeatButton) {
+    const mo = new MutationObserver(async (mutations) => {
+      SpotiShush.debug('mutations:', mutations)
+
+      if (repeatButton.disabled) {
+        // TIDAL disables the repeat button when an ad is playing.
+        SpotiShush.log('Ad detected!')
+        try {
+          await browser.runtime.sendMessage({ action: 'mute' })
+        } catch (error) {
+          SpotiShush.debug(error.message)
+          return
+        }
+        SpotiShush.log('Tab muted.')
+      } else {
+        SpotiShush.log('Not an ad!')
+        try {
+          await browser.runtime.sendMessage({ action: 'unmute' })
+        } catch (error) {
+          SpotiShush.debug(error.message)
+          return
+        }
+        SpotiShush.log('Tab unmuted.')
+      }
+    })
+    mo.observe(repeatButton, {
+      attributes: true
+    })
+  }
+
   // Detect ads by observing mutations in the `data-testid` HTML attribute of Spotify's player controls.
-  function setupAdsObserver (nowPlaying) {
+  function spotifySetupAdsObserver (nowPlaying) {
     const footerObj = nowPlaying.firstElementChild
 
     if (footerObj === null) {

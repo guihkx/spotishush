@@ -22,7 +22,8 @@
     {
       "matches": [
         "https://open.spotify.com/*",
-        "https://www.deezer.com/*"
+        "https://www.deezer.com/*",
+        "https://listen.tidal.com/*"
       ],
       "js": [
         "browser-polyfill.min.js",
