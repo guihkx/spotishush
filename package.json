@@ -18,9 +18,6 @@
     "envs": [
       "browser",
       "webextensions"
-    ],
-    "globals": [
-      "SpotiShush"
     ]
   }
 }
