@@ -15,8 +15,8 @@
     "polyfill:copy": "cp ./node_modules/webextension-polyfill/dist/browser-polyfill.min.js{,.map} ./src/",
     "standard:check": "standard --verbose ./src/**/*.js",
     "standard:fix": "standard --fix --verbose ./src/**/*.js",
-    "start:chromium": "web-ext run --config ./web-ext-chromium.js --no-config-discovery --target chromium",
-    "start:firefox": "web-ext run --config ./web-ext-firefox.js --no-config-discovery --target firefox-desktop"
+    "start:chromium": "web-ext run --target chromium --config ./web-ext-config.js --no-config-discovery",
+    "start:firefox": "web-ext run --target firefox-desktop --config ./web-ext-config.js --no-config-discovery"
   },
   "standard": {
     "envs": [
