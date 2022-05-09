@@ -8,16 +8,34 @@
     "web-ext": "6.8.0"
   },
   "scripts": {
-    "build": "web-ext build --config ./web-ext-config.js",
+    "build": "web-ext build",
     "standard:check": "standard --verbose ./src/**/*.js",
     "standard:fix": "standard --fix --verbose ./src/**/*.js",
-    "start:chromium": "web-ext run --target chromium --config ./web-ext-config.js --no-config-discovery",
-    "start:firefox": "web-ext run --target firefox-desktop --config ./web-ext-config.js --no-config-discovery"
+    "start:chromium": "web-ext run --target chromium",
+    "start:firefox": "web-ext run --target firefox-desktop"
   },
   "standard": {
     "envs": [
       "browser",
       "webextensions"
     ]
+  },
+  "webExt": {
+    "artifactsDir": "web-ext-artifacts",
+    "build": {
+      "overwriteDest": true
+    },
+    "ignoreFiles": [
+      "**/*.js.map"
+    ],
+    "run": {
+      "startUrl": [
+        "https://accounts.spotify.com/en/login?continue=https://open.spotify.com/",
+        "https://www.deezer.com/us/login/email?redirect_type=page&redirect_link=/us/playlist/1996494362",
+        "https://listen.tidal.com/login?autoredirect=true&lang=en"
+      ]
+    },
+    "sourceDir": "src",
+    "verbose": false
   }
 }
