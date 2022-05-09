@@ -3,16 +3,12 @@
   "version": "2022.4.30",
   "license": "MIT",
   "author": "guihkx",
-  "dependencies": {
-    "webextension-polyfill": "0.9.0"
-  },
   "devDependencies": {
     "standard": "16.0.4",
     "web-ext": "6.8.0"
   },
   "scripts": {
     "build": "web-ext build --config ./web-ext-config.js",
-    "polyfill:copy": "cp ./node_modules/webextension-polyfill/dist/browser-polyfill.min.js{,.map} ./src/",
     "standard:check": "standard --verbose ./src/**/*.js",
     "standard:fix": "standard --fix --verbose ./src/**/*.js",
     "start:chromium": "web-ext run --target chromium --config ./web-ext-config.js --no-config-discovery",
