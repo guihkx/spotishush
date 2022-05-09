@@ -13,8 +13,6 @@
   "background": {
     "persistent": true,
     "scripts": [
-      "browser-polyfill.min.js",
-      "utils.js",
       "background.js"
     ]
   },
@@ -26,8 +24,6 @@
         "https://listen.tidal.com/*"
       ],
       "js": [
-        "browser-polyfill.min.js",
-        "utils.js",
         "spotishush.js"
       ]
     }

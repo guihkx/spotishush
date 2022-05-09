@@ -1,110 +1,43 @@
-;(async () => {
-  'use strict'
+'use strict'
 
-  browser.runtime.onMessage.addListener(messageHandler)
+// Quick polyfill. Tested on Firefox and Chrome.
+const BROWSER = typeof browser === 'undefined' ? chrome : browser
 
-  function messageHandler (message, details) {
-    return new Promise((resolve, reject) => {
-      SpotiShush.debug('Got a message:', message)
-      SpotiShush.debug('details:', details)
+BROWSER.runtime.onMessage.addListener(muteOrUnmute)
 
-      const srcTab = details.tab
+function muteOrUnmute (message, sender, sendResponse) {
+  const wantsToMute = message.action === 'mute'
+  const isMuted = sender.tab.mutedInfo.muted
+  const mutedByUser = sender.tab.mutedInfo.reason === 'user'
 
-      SpotiShush.debug(
-        'isTabMuted():',
-        isTabMuted(srcTab),
-        '| wasTabMutedByUs():',
-        wasTabMutedByUs(srcTab)
-      )
-
-      switch (message.action) {
-        case 'mute': {
-          if (isTabMuted(srcTab)) {
-            reject(new Error('Tab is already muted.'))
-            return
-          }
-          muteTab(srcTab.id)
-            .then((result) => {
-              resolve(result)
-            })
-            .catch((error) => {
-              SpotiShush.log(error.message)
-              reject(new Error(error.message))
-            })
-
-          break
-        }
-        case 'unmute': {
-          if (!isTabMuted(srcTab)) {
-            reject(new Error('Tab is not muted.'))
-            return
-          }
-          if (!wasTabMutedByUs(srcTab)) {
-            reject(new Error('Tab was muted by the user.'))
-            return
-          }
-          unMuteTab(srcTab.id)
-            .then((result) => {
-              resolve(result)
-            })
-            .catch((error) => {
-              SpotiShush.log(error.message)
-              reject(new Error(error.message))
-            })
-
-          break
-        }
-        default: {
-          reject(new Error(`Unknown action: ${message.action}`))
-          break
-        }
-      }
-    })
+  const response = {
+    ok: false,
+    text: '',
+    details: sender.tab.mutedInfo,
+    dontLog: message.dontLog
   }
-
-  function isTabMuted (tabInfo) {
-    if ('mutedInfo' in tabInfo) {
-      if ('muted' in tabInfo.mutedInfo) {
-        return tabInfo.mutedInfo.muted
-      }
+  // Check if the desired action will actually change the tab state.
+  // Otherwise, we don't do anything.
+  if ((wantsToMute && isMuted) || (!wantsToMute && !isMuted)) {
+    response.text = `Warning: This tab is already ${message.action}d, not doing anything`
+    sendResponse(response)
+    return true
+  }
+  // Prevents us from unmuting a tab muted on purpose by the user.
+  if (!wantsToMute && isMuted && mutedByUser) {
+    response.text = 'Error: This tab was muted by the user, refusing to unmute it'
+    sendResponse(response)
+    return true
+  }
+  // Everything is ok, update the tab's state.
+  BROWSER.tabs.update(sender.tab.id, { muted: wantsToMute }, () => {
+    if (BROWSER.runtime.lastError) {
+      response.text = `Error: ${BROWSER.runtime.lastError.message}`
+      response.details = sender.tab
+    } else {
+      response.ok = true
     }
-    return false
-  }
-
-  function wasTabMutedByUs (tabInfo) {
-    if ('reason' in tabInfo.mutedInfo) {
-      return tabInfo.mutedInfo.reason !== 'user'
-    }
-    return false
-  }
-
-  function unMuteTab (tabId) {
-    return new Promise((resolve, reject) => {
-      browser.tabs
-        .update(tabId, {
-          muted: false
-        })
-        .then((details) => {
-          resolve(details)
-        })
-        .catch((error) => {
-          reject(new Error(`Unable to unmute tab: ${error.message}`))
-        })
-    })
-  }
-
-  function muteTab (tabId) {
-    return new Promise((resolve, reject) => {
-      browser.tabs
-        .update(tabId, {
-          muted: true
-        })
-        .then((details) => {
-          resolve(details)
-        })
-        .catch((error) => {
-          reject(new Error(`Unable to mute tab: ${error.message}`))
-        })
-    })
-  }
-})()
+    sendResponse(response)
+  })
+  return true
+}
