@@ -10,6 +10,8 @@ Pick the right one for your browser:
 
 [![Mozilla Add-on](https://img.shields.io/amo/v/spotishush?label=MOZILLA+FIREFOX&style=for-the-badge)](https://addons.mozilla.org/firefox/addon/spotishush/)
 
+[![Edge Add-on](https://img.shields.io/badge/dynamic/json?prefix=V&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fcfohjlnnhademjaockpjlilclkiimchg&label=MICROSOFT+EDGE&style=for-the-badge)](https://microsoftedge.microsoft.com/addons/detail/cfohjlnnhademjaockpjlilclkiimchg)
+
 No additional configuration is required! You just have to reload any Spotify, Deezer or TIDAL tab in your browser.
 
 ---
