@@ -1,6 +1,11 @@
 # <img valign="middle" src="./etc/spotishush-logo.svg" width="32" height="32"> SpotiShush
 
-SpotiShush is a browser extension that automatically mutes audio ads on [Spotify Web Player](https://open.spotify.com/), [Deezer](https://www.deezer.com/) and [TIDAL](https://listen.tidal.com/).
+SpotiShush is a browser extension that automatically mutes audio ads on many music streaming services, including:
+
+- [Spotify Web Player](https://open.spotify.com/)
+- [Deezer](https://www.deezer.com/)
+- [TIDAL](https://listen.tidal.com/)
+- [IDAGIO](https://app.idagio.com/)
 
 ## Installation
 
@@ -12,7 +17,7 @@ Pick the right one for your browser:
 
 [![Edge Add-on](https://img.shields.io/badge/dynamic/json?prefix=V&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fcfohjlnnhademjaockpjlilclkiimchg&label=MICROSOFT+EDGE&style=for-the-badge)](https://microsoftedge.microsoft.com/addons/detail/cfohjlnnhademjaockpjlilclkiimchg)
 
-No additional configuration is required! You just have to reload any Spotify, Deezer or TIDAL tab in your browser.
+No additional configuration is required! You just have to reload any existing tab that is playing music.
 
 ---
 
@@ -20,7 +25,7 @@ No additional configuration is required! You just have to reload any Spotify, De
 
 ### Why not use an Ad Blocker instead?
 
-While ads can sometimes be annoying (especially in audio format), I believe Spotify, Deezer and TIDAL offer an awesome service for non-paying users. And I also believe that if most people used an ad-blocker, the free modality would probably be much more limited.
+While ads can sometimes be annoying (especially in audio format), I believe most music streaming websites offer an awesome service for non-paying users. And I also believe that if most people used an ad-blocker, the free modality would probably be much more limited.
 
 ### How does it work?
 
@@ -54,7 +59,7 @@ Don't worry about having to re-run the command above every time you change somet
 
 SpotiShush follows the [StandardJS coding style](https://standardjs.com/).
 
-Before you commit your changes, run the `standard` linter to check for errors:
+Before you commit your changes, please run the `standard` linter to check for errors:
 
 ```bash
 yarn standard:check

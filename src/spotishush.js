@@ -21,6 +21,11 @@ const SITES = {
     name: 'TIDAL',
     log_css: 'background: #fff; color: #000; font-weight: bold',
     init: tidalInit
+  },
+  'app.idagio.com': {
+    name: 'IDAGIO',
+    log_css: 'background: #fff; color: #000; font-weight: bold',
+    init: idagioInit
   }
 }
 
@@ -117,6 +122,13 @@ async function tidalInit () {
   LOG('Monitoring ads now!')
 }
 
+async function idagioInit () {
+  LOG('Waiting for progress bar to be ready...')
+  const progressBar = await lazySelector('input#input-handle')
+  idagioSetupAdsObserver(progressBar)
+  LOG('Monitoring ads now!')
+}
+
 function lazySelector (selector) {
   return new Promise(resolve => {
     const id = setInterval(() => {
@@ -204,4 +216,28 @@ function tidalIsAd (trackDetails) {
     return false
   }
   return trackDetails.firstElementChild.tagName === 'A'
+}
+
+function idagioSetupAdsObserver (progressBar) {
+  const mo = new MutationObserver(mutations => idagioHandleAd(mutations[0].target))
+  mo.observe(progressBar, {
+    childList: false,
+    attributes: true,
+    attributeFilter: ['disabled']
+  })
+  // IDAGIO ads persist through page reloads.
+  // Our MutationObserver function is not triggered after the page loads.
+  // Do a single manual check.
+  idagioHandleAd(progressBar)
+  return mo
+}
+
+function idagioHandleAd (progressBar) {
+  if (progressBar.disabled) {
+    LOG('Ad detected in our song queue, muting tab...')
+    sendToBg({ action: 'mute' })
+  } else {
+    LOG('Not an ad in our song queue, unmuting tab...')
+    sendToBg({ action: 'unmute' })
+  }
 }
