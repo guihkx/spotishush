@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "SpotiShush",
-  "version": "2022.10.19",
+  "version": "2023.1.24",
   "default_locale": "en",
   "description": "__MSG_ext_desc__",
   "icons": {
