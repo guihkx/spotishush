@@ -68,39 +68,12 @@ function receiveFromBg (response) {
   }
 }
 
-function deezerInit () {
-  // Deezer has their own ad-related events.
-  // Their names can be found in the `window.Events.ads` object.
-  const knownEvents = {
-    // `window.Events.ads.adBegin`:
-    // Unfortunately, by the time this event is fired, Deezer already has the ad
-    // pre-buffered and ready to play. Sometimes, Deezer will even play the ad
-    // before we can mute the tab. In comparison, the ad detection method in
-    // deezerSetupAdsObserver() can be 200~600ms faster.
-    // This is just a redundancy, in case deezerSetupAdsObserver() fails.
-    sasVideoStart: () => {
-      LOG('[Fallback] Ad detected in our song queue, muting tab...')
-      sendToBg({
-        action: 'mute',
-        dontLog: true
-      })
-    },
-    // `window.Events.ads.adEnd`:
-    sasVideoEnd: () => {
-      LOG('Ad has ended, unmuting tab...')
-      sendToBg({ action: 'unmute' })
-    },
-    // `window.Events.ads.adError`:
-    adError: () => {
-      LOG('Ad error, unmuting tab...')
-      sendToBg({ action: 'unmute' })
-    }
-  }
-  deezerSetupAdsObserver()
-  // Hook into Deezer's own events.
-  for (const event in knownEvents) {
-    window.addEventListener(event, knownEvents[event])
-  }
+async function deezerInit () {
+  LOG('Waiting for ad control element to load...')
+  // This is the first <div> in #page_content, with no attributes.
+  // The selector is purposely specific because the <div> is lazy-loaded, which can give us wrong matches.
+  const adControlElement = await lazySelector('#page_content > div:not([class], [id], [style]):nth-child(1)')
+  deezerSetupAdsObserver(adControlElement)
   LOG('Monitoring ads now!')
 }
 
@@ -142,24 +115,23 @@ function lazySelector (selector) {
 }
 
 // Deezer's ad detection method:
-// As mentioned above, using Deezer's own event for ad detection isn't that
-// great for us. However, the other two events, fired when an ad finishes or
-// an ad fails, are reliable and fast.
-// To manually detect the ad, we observe children mutations in `document.body`.
-// Deezer will append a hidden element with a specific id.
-function deezerSetupAdsObserver () {
+// Observe children mutations in the first <div> element with no attributes in #page_content.
+// If it's an ad, the first child element of that <div> will be an <audio>.
+function deezerSetupAdsObserver (adControlElement) {
   const mo = new MutationObserver(mutations => {
     for (const mutation of mutations) {
       for (const addedNode of mutation.addedNodes) {
-        if (addedNode.id && addedNode.id.startsWith('sas-background-')) {
+        if (addedNode.tagName === 'AUDIO') {
           LOG('Ad detected in our song queue, muting tab...')
           sendToBg({ action: 'mute' })
-          return
+        } else {
+          LOG('Not an ad in our song queue, unmuting tab...')
+          sendToBg({ action: 'unmute' })
         }
       }
     }
   })
-  mo.observe(document.body, {
+  mo.observe(adControlElement, {
     childList: true
   })
   return mo
