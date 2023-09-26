@@ -70,9 +70,9 @@ function receiveFromBg (response) {
 
 async function deezerInit () {
   LOG('Waiting for ad control element to load...')
-  // This is the first <div> in #page_content, with no attributes.
-  // The selector is purposely specific because the <div> is lazy-loaded, which can give us wrong matches.
-  const adControlElement = await lazySelector('#page_content > div:not([class], [id], [style]):nth-child(1)')
+  // This <div> (with no attributes) is inside the first <div> (also with no attributes) in #page_content.
+  // The selector is purposely specific because this <div> is lazy-loaded, which can give us wrong matches.
+  const adControlElement = await lazySelector('#page_content > div:not([class], [id], [style]):nth-child(1) > div:not([class], [id], [style])')
   deezerSetupAdsObserver(adControlElement)
   LOG('Monitoring ads now!')
 }
@@ -121,12 +121,17 @@ function deezerSetupAdsObserver (adControlElement) {
   const mo = new MutationObserver(mutations => {
     for (const mutation of mutations) {
       for (const addedNode of mutation.addedNodes) {
-        if (addedNode.tagName === 'AUDIO') {
+        if (addedNode instanceof HTMLAudioElement) {
           LOG('Ad detected in our song queue, muting tab...')
           sendToBg({ action: 'mute' })
-        } else {
+          return
+        }
+      }
+      for (const removedNode of mutation.removedNodes) {
+        if (removedNode instanceof HTMLAudioElement) {
           LOG('Not an ad in our song queue, unmuting tab...')
           sendToBg({ action: 'unmute' })
+          return
         }
       }
     }
