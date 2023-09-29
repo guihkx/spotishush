@@ -3,6 +3,7 @@
 SpotiShush is a browser extension that automatically mutes audio ads on many music streaming services, including:
 
 - [Spotify Web Player](https://open.spotify.com/)
+- [YouTube Music](https://music.youtube.com/)
 - [Deezer](https://www.deezer.com/)
 - [TIDAL](https://listen.tidal.com/)
 - [IDAGIO](https://app.idagio.com/)

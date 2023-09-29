@@ -26,6 +26,11 @@ const SITES = {
     name: 'IDAGIO',
     log_css: 'background: #fff; color: #000; font-weight: bold',
     init: idagioInit
+  },
+  'music.youtube.com': {
+    name: 'YouTube Music',
+    log_css: 'color: #ff002b; font-weight: bold',
+    init: youtubeMusicInit
   }
 }
 
@@ -99,6 +104,13 @@ async function idagioInit () {
   LOG('Waiting for progress bar to be ready...')
   const progressBar = await lazySelector('input#input-handle')
   idagioSetupAdsObserver(progressBar)
+  LOG('Monitoring ads now!')
+}
+
+async function youtubeMusicInit () {
+  LOG('Waiting for progress bar to be ready...')
+  const adContainer = await lazySelector('.video-ads.ytp-ad-module')
+  youtubeMusicSetupAdsObserver(adContainer)
   LOG('Monitoring ads now!')
 }
 
@@ -206,6 +218,31 @@ function idagioSetupAdsObserver (progressBar) {
   // Our MutationObserver function is not triggered after the page loads.
   // Do a single manual check.
   idagioHandleAd(progressBar)
+  return mo
+}
+
+function youtubeMusicSetupAdsObserver (adContainer) {
+  const mo = new MutationObserver(mutations => {
+    for (const mutation of mutations) {
+      for (const addedNode of mutation.addedNodes) {
+        if (addedNode.classList.contains('ytp-ad-player-overlay')) {
+          LOG('Ad detected in our song queue, muting tab...')
+          sendToBg({ action: 'mute' })
+          return
+        }
+      }
+      for (const removedNode of mutation.removedNodes) {
+        if (removedNode.classList.contains('ytp-ad-player-overlay')) {
+          LOG('Not an ad in our song queue, unmuting tab...')
+          sendToBg({ action: 'unmute' })
+          return
+        }
+      }
+    }
+  })
+  mo.observe(adContainer, {
+    childList: true
+  })
   return mo
 }
 
