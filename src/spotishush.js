@@ -70,9 +70,9 @@ function receiveFromBg (response) {
 
 async function deezerInit () {
   LOG('Waiting for ad control element to load...')
-  // This <div> (with no attributes) is inside the first <div> (also with no attributes) in #page_content.
+  // This <div> (with [id] attribute) is inside the first <div> (with no attributes) in #page_content and will be replaced with the HTMLAudioElement later.
   // The selector is purposely specific because this <div> is lazy-loaded, which can give us wrong matches.
-  const adControlElement = await lazySelector('#page_content > div:not([class], [id], [style]):nth-child(1) > div:not([class], [id], [style])')
+  const adControlElement = await lazySelector('#page_content > div:not([class], [id], [style])')
   deezerSetupAdsObserver(adControlElement)
   LOG('Monitoring ads now!')
 }
