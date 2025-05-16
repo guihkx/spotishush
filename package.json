@@ -4,7 +4,7 @@
   "license": "MIT",
   "author": "guihkx",
   "devDependencies": {
-    "standard": "17.1.0",
+    "standard": "17.1.2",
     "web-ext": "8.0.0"
   },
   "scripts": {
