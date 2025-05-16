@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "SpotiShush",
   "version": "2023.9.26",
   "default_locale": "en",
@@ -10,8 +10,14 @@
     "128": "img/spotishush128.png"
   },
   "author": "guihkx",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{5067e500-5bc8-4537-9a9a-d52cb90e37b2}",
+      "strict_min_version": "121.0"
+    }
+  },
   "background": {
-    "persistent": true,
+    "service_worker": "background.js",
     "scripts": [
       "background.js"
     ]
