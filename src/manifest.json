@@ -21,7 +21,6 @@
       "matches": [
         "https://open.spotify.com/*",
         "https://www.deezer.com/*",
-        "https://listen.tidal.com/*",
         "https://app.idagio.com/*"
       ],
       "js": [

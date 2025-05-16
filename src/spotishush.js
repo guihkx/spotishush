@@ -17,11 +17,6 @@ const SITES = {
     log_css: 'color: #1db954; font-weight: bold',
     init: spotifyInit
   },
-  'listen.tidal.com': {
-    name: 'TIDAL',
-    log_css: 'background: #fff; color: #000; font-weight: bold',
-    init: tidalInit
-  },
   'app.idagio.com': {
     name: 'IDAGIO',
     log_css: 'background: #fff; color: #000; font-weight: bold',
@@ -83,15 +78,6 @@ async function spotifyInit () {
     'footer[data-testid=now-playing-bar]'
   )
   spotifySetupAdsObserver(nowPlayingBar)
-  LOG('Monitoring ads now!')
-}
-
-async function tidalInit () {
-  LOG('Waiting for track details to be ready...')
-  const trackDetails = await lazySelector(
-    'div#footerPlayer > div[data-type=mediaItem] > :nth-child(2)'
-  )
-  tidalSetupAdsObserver(trackDetails)
   LOG('Monitoring ads now!')
 }
 
@@ -158,41 +144,6 @@ function spotifySetupAdsObserver (nowPlayingBar) {
     attributes: true
   })
   return mo
-}
-
-// TIDAL's ad detection method:
-// Observe children mutations in the track details <div>.
-// If it's an ad, the first HTML element will be an anchor (<a>).
-// See also: `tidalIsAd()`
-function tidalSetupAdsObserver (trackDetails) {
-  const mo = new MutationObserver(mutations => tidalHandleAd(mutations[0].target))
-  mo.observe(trackDetails, {
-    childList: true
-  })
-  // TIDAL ads persist through page reloads.
-  // Our MutationObserver function is not triggered after the page loads.
-  // Do a single manual check.
-  tidalHandleAd(trackDetails, true)
-  return mo
-}
-
-function tidalHandleAd (trackDetails, ignoreNonAd) {
-  if (tidalIsAd(trackDetails)) {
-    LOG('Ad detected in our song queue, muting tab...')
-    sendToBg({ action: 'mute' })
-    return
-  }
-  if (!ignoreNonAd) {
-    LOG('Not an ad in our song queue, unmuting tab...')
-    sendToBg({ action: 'unmute' })
-  }
-}
-
-function tidalIsAd (trackDetails) {
-  if (!trackDetails.firstElementChild) {
-    return false
-  }
-  return trackDetails.firstElementChild.tagName === 'A'
 }
 
 function idagioSetupAdsObserver (progressBar) {
