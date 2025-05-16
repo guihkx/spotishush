@@ -21,6 +21,11 @@ const SITES = {
     name: 'IDAGIO',
     log_css: 'background: #fff; color: #000; font-weight: bold',
     init: idagioInit
+  },
+  'zvuk.com': {
+    name: 'Zvuk',
+    log_css: 'background: #fff; color: #000; font-weight: bold',
+    init: zvukInit
   }
 }
 
@@ -85,6 +90,15 @@ async function idagioInit () {
   LOG('Waiting for progress bar to be ready...')
   const progressBar = await lazySelector('input#input-handle')
   idagioSetupAdsObserver(progressBar)
+  LOG('Monitoring ads now!')
+}
+
+async function zvukInit () {
+  LOG('Waiting for player controls to be ready...')
+  const addToFavoritesButton = await lazySelector(
+    'button[class*=styles_btnAdd__]'
+  )
+  zvukSetupAdsObserver(addToFavoritesButton)
   LOG('Monitoring ads now!')
 }
 
@@ -168,4 +182,22 @@ function idagioHandleAd (progressBar) {
     LOG('Not an ad in our song queue, unmuting tab...')
     sendToBg({ action: 'unmute' })
   }
+}
+
+// Zvuk's ad detection method:
+// Observe attribute mutations on the plus button (a.k.a. "add to favorites") in player controls.
+function zvukSetupAdsObserver (addToFavoritesButton) {
+  const mo = new MutationObserver(() => {
+    if (addToFavoritesButton.disabled) {
+      LOG('Ad detected in our song queue, muting tab...')
+      sendToBg({ action: 'mute' })
+    } else {
+      LOG('Not an ad in our song queue, unmuting tab...')
+      sendToBg({ action: 'unmute' })
+    }
+  })
+  mo.observe(addToFavoritesButton, {
+    attributes: true
+  })
+  return mo
 }
