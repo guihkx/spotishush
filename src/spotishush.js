@@ -80,7 +80,7 @@ async function deezerInit () {
 async function spotifyInit () {
   LOG('Waiting for player controls to be ready...')
   const nowPlayingBar = await lazySelector(
-    'footer[data-testid=now-playing-bar]'
+    '[data-testid=now-playing-bar]'
   )
   spotifySetupAdsObserver(nowPlayingBar)
   LOG('Monitoring ads now!')
