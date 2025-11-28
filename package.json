@@ -5,7 +5,7 @@
   "author": "guihkx",
   "devDependencies": {
     "standard": "17.1.2",
-    "web-ext": "8.6.0"
+    "web-ext": "9.2.0"
   },
   "scripts": {
     "build": "web-ext build",
